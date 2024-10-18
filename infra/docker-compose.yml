@@ -1,0 +1,17 @@
+services:
+  imgstore-pg:
+    image: postgres:17-alpine
+    container_name: postgres_imgstore
+    environment:
+      POSTGRES_DB: imgstore
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      PGDATA: /data/postgres-imgstore
+    ports:
+      - "5432:5432"
+    volumes:
+       - imgstore-pg:/data/postgres-imgstore
+       - ./dump:/docker-entrypoint-initdb.d
+volumes:
+    imgstore-pg:
+      external: true
